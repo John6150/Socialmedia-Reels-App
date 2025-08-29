@@ -1,15 +1,126 @@
-import 'dart:io';
-import 'dart:typed_data';
-
-import 'package:_firstapp/variables.dart';
-import 'package:_firstapp/widgets.dart';
 // import 'package:_firstapp/widgets.dart';
+// ignore_for_file: unused_local_variable
+
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  // final staff = Staff();
+  Student student_1 = Student(
+      name: 'Mohammed',
+      stdId: 'SQI1234',
+      dpt: 'Soft Engineering',
+      sub: ['Flutter', 'NodeJs']);
+
+  final staff_1 = employ(student_1);
+  final gradute = terminateEmployment(staff_1,
+      stdId: student_1.stdId, dpt: student_1.dpt, sub: student_1.sub);
+  print(staff_1.toJson(staff_1));
+  print(gradute.toJson(gradute));
+
+  // {
+  //   'name': 'Mohammed',
+  // }
+}
+
+Staff employ(Student data) {
+  String genId() {
+    // String id = '';
+    final buffer = StringBuffer();
+    for (var i = 0; i < 5; i++) {
+      var random = Random();
+      int x = random.nextInt(100);
+      // id += x.toString();
+      buffer.write(x);
+    }
+    return buffer.toString();
+    // return id;
+  }
+
+  return Staff(name: data.name, stfId: genId(), companyDpt: 'IT');
+}
+
+Student terminateEmployment(Staff data,
+    {required String stdId, required String dpt, required List sub}) {
+  return Student(name: data.name, stdId: stdId, dpt: dpt, sub: sub);
+}
+
+class Student {
+  final String name;
+  final String stdId;
+  final String dpt;
+  final int? age;
+  final List sub;
+  final String? img;
+
+  Student(
+      {required this.name,
+      required this.stdId,
+      required this.dpt,
+      this.age,
+      this.img,
+      required this.sub});
+
+  Student fromJson(Map<String, dynamic> data) {
+    return Student(
+        name: data['name'] ?? '',
+        stdId: data['stdId'] ?? '',
+        dpt: data['dpt'] ?? '',
+        img: data['img'] ?? '',
+        age: data['age'] ?? 0,
+        sub: data['sub'] ?? []);
+  }
+
+  Map<String, dynamic> toJson(Student data) {
+    return {
+      'name': data.name,
+      'stdId': data.stdId,
+      'dpt': data.dpt,
+      'img': data.img,
+      'age': data.age,
+      'sub': data.sub
+    };
+  }
+}
+
+class Staff {
+  final String name;
+  final String stfId;
+  final String companyDpt;
+  final int? age;
+  final String? img;
+
+  Staff({
+    required this.name,
+    required this.stfId,
+    required this.companyDpt,
+    this.age,
+    this.img,
+  });
+
+  Staff fromJson(Map<String, dynamic> data) {
+    return Staff(
+      name: data['name'] ?? '',
+      stfId: data['stfId'] ?? '',
+      companyDpt: data['companyDpt'] ?? '',
+      img: data['img'] ?? '',
+      age: data['age'] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson(Staff data) {
+    return {
+      'name': data.name,
+      'stdId': data.stfId,
+      'dpt': data.companyDpt,
+      'img': data.img,
+      'age': data.age,
+    };
+  }
 }
 
 class MyApp extends StatelessWidget {

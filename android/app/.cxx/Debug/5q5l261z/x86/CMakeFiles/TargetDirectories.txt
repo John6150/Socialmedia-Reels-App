@@ -1,0 +1,2 @@
+/Users/Apple/Desktop/Flutter DART/SQI Classes/_firstapp/android/app/.cxx/Debug/5q5l261z/x86/CMakeFiles/rebuild_cache.dir
+/Users/Apple/Desktop/Flutter DART/SQI Classes/_firstapp/android/app/.cxx/Debug/5q5l261z/x86/CMakeFiles/edit_cache.dir
